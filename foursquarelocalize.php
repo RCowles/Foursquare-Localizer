@@ -46,13 +46,13 @@ if (!function_exists('foursquare_local_options_do_page')) {
 
 		$clientID = $options['clientid'];
 		$clientSecret = $options['clientsecret'];
-		$redirectURL = $options['redirecturl'];  // Remove urlencode.  Old: $redirectURL = urlencode($options['redirecturl']);
+		$redirectURL = $options['redirecturl'];
 		$code = $_GET['code'];
 		if ($code != '') {
 			$contents = file_get_contents("https://foursquare.com/oauth2/access_token?client_id=" . $clientID . "&client_secret=" . $clientSecret .
-			"&grant_type=authorization_code&redirect_uri=" . urlencode($redirectURL) . "&code=" . urlencode($code)); // Added urlencode for redirectURL.  Old: "&grant_type=authorization_code&redirect_uri=" . $redirectURL . "&code=" . urlencode($code));
+			"&grant_type=authorization_code&redirect_uri=" . urlencode($redirectURL) . "&code=" . urlencode($code));
 
-			$options[token] = 'json_decode($contents)';  // Added single quotes, so string isn't read as constant.  Old: $options[token] = json_decode($contents);
+			$options[token] = 'json_decode($contents)';
 			update_option('foursquare_local', $options);
 		}
 
